@@ -1,5 +1,6 @@
 package t::Cache;
 
+use Storable qw/ freeze thaw /;
 use YAML::Syck;
 use strict;
 use warnings;
@@ -20,13 +21,14 @@ sub get {
     my $value = $self->{data}->{$key};
     if (defined $value) {
         #warn "Hit!";
+        return freeze $value;
     }
-    $value;
+    undef;
 }
 
 sub set {
     my ($self, $key, $value) = @_;
-    $self->{data}->{$key} = $value;
+    $self->{data}->{$key} = thaw $value;
     $self->save_cache;
 }
 

@@ -6,10 +6,16 @@ eval {
     use LWP::UserAgent;
     my $agent = LWP::UserAgent->new;
     $agent->env_proxy();
-    my $res = $agent->get('http://www.baidu.com');
-    die if ! $res->is_success;
+    my $url = 'http://www.baidu.com';
+    my $res = $agent->get($url);
+    if (! $res->is_success) {
+        die $res->status_line, "\n";
+    }
 };
-plan skip_all => "network seems unavailable (live tests skipped)" if $@;
+if ($@) {
+    warn $@;
+    plan skip_all => "network seems unavailable (live tests skipped)" ;
+}
 
 plan tests => 6 * 20 + 2;
 

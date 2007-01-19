@@ -2,7 +2,7 @@ NAME
     WWW::Baidu - Perl interface for the www.baidu.com search engine
 
 VERSION
-    This document describes version 0.01 of "WWW::Baidu", released Jan 19,
+    This document describes version 0.03 of "WWW::Baidu", released Jan 19,
     2007.
 
 SYNOPSIS
@@ -94,8 +94,19 @@ CODE COVERAGE
         Total                          99.0   85.0   66.7  100.0  100.0  100.0   95.4
         ---------------------------- ------ ------ ------ ------ ------ ------ ------
 
+SOURCE CONTROL
+    You can always get the latest source code from the following Subversion
+    repos:
+
+    <https://svn.openfoundry.org/wwwbaidu>
+
+    It has anonymous access to all.
+
+    If you like to get a commit bit, please let me know. I've been trying to
+    follow Audrey's best practices. ;)
+
 AUTHOR
-    Agent Zhang <agentzh AT gmail DOT com>
+    Agent Zhang <agentzh@gmail.com>
 
 COPYRIGHT
     Copyright (c) 2007 by Agent Zhang. All rights reserved.
