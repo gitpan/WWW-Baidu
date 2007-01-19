@@ -1,9 +1,12 @@
 = Change Log for WWW::Baidu
 
-== version 0.03 (2007-01-19, rev 5)
+== Version 0.04 (2007-01-19, rev 7)
+* minor tweaks for small issues...
+
+== Version 0.03 (2007-01-19, rev 5)
 * fixed the Storale binary incompatibility bug
 
-= Version 0.02 (2007-01-19, rev 3)
+== Version 0.02 (2007-01-19, rev 3)
 * added notes for the svn repos
 * added live tests to t/02-live.t
 

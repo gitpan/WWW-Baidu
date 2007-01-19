@@ -11,7 +11,7 @@ use Encode qw/ encode decode /;
 use WWW::Baidu::Record;
 use utf8;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 our $Debug = 1;
 
@@ -147,7 +147,7 @@ WWW::Baidu - Perl interface for the www.baidu.com search engine
 
 =head1 VERSION
 
-This document describes version 0.03 of C<WWW::Baidu>, released Jan 19, 2007.
+This document describes version 0.04 of C<WWW::Baidu>, released Jan 19, 2007.
 
 =head1 SYNOPSIS
 

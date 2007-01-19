@@ -2,7 +2,7 @@ NAME
     WWW::Baidu - Perl interface for the www.baidu.com search engine
 
 VERSION
-    This document describes version 0.03 of "WWW::Baidu", released Jan 19,
+    This document describes version 0.04 of "WWW::Baidu", released Jan 19,
     2007.
 
 SYNOPSIS
