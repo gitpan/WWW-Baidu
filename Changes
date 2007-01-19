@@ -1,2 +1,6 @@
-=== 0.01 2007-01-19
+=== Version 0.02 (2007-01-19, rev 3)
+* added notes for the svn repos
+* added live tests to t/02-live.t
+
+=== Version 0.01 (2007-01-19, rev 1)
 * initial CPAN release

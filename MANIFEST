@@ -1,6 +1,5 @@
 Makefile.PL
 META.yml
-
 README
 Changes
 MANIFEST
@@ -8,6 +7,7 @@ lib/WWW/Baidu.pm
 lib/WWW/Baidu/Record.pm
 t/Cache.pm
 t/01-sanity.t
+t/02-live.t
 t/pod.t
 t/pod-coverage.t
 t/cache/01-sanity.yml

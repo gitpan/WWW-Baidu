@@ -11,7 +11,7 @@ use Encode qw/ encode decode /;
 use WWW::Baidu::Record;
 use utf8;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 our $Debug = 1;
 
@@ -118,7 +118,7 @@ sub _parse_record ($$) {
     }
     my ($size, $date);
     if ($text =~
-        s/\s+(\d+\s*[KM])\s+(\d{4}-\d{1,2}-\d{1,2})\s*-?(\s+\S+\s+上的更多结果)?\s*$//s) {
+        s/\s+(\d+[KM])\s+(\d{4}-\d{1,2}-\d{1,2})\b//s) {
         ($size, $date) = ($1, $2);
     };
     WWW::Baidu::Record->new(
@@ -147,7 +147,7 @@ WWW::Baidu - Perl interface for the www.baidu.com search engine
 
 =head1 VERSION
 
-This document describes version 0.01 of C<WWW::Baidu>, released Jan 19, 2007.
+This document describes version 0.02 of C<WWW::Baidu>, released Jan 19, 2007.
 
 =head1 SYNOPSIS
 
@@ -251,9 +251,20 @@ L<Devel::Cover> report on this module test suite.
     Total                          99.0   85.0   66.7  100.0  100.0  100.0   95.4
     ---------------------------- ------ ------ ------ ------ ------ ------ ------
 
+=head1 SOURCE CONTROL
+
+You can always get the latest source code from the following Subversion repos:
+
+L<https://svn.openfoundry.org/wwwbaidu>
+
+It has anonymous access to all.
+
+If you like to get a commit bit, please let me know. I've been trying to follow
+Audrey's best practices. ;)
+
 =head1 AUTHOR
 
-Agent Zhang E<lt>agentzh AT gmail DOT comE<gt>
+Agent Zhang E<lt>agentzh@gmail.comE<gt>
 
 =head1 COPYRIGHT
 

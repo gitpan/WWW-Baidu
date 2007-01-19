@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use base qw(Class::Accessor);
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 __PACKAGE__->mk_ro_accessors(
     qw/ title url summary size date cached_url /
@@ -19,7 +19,7 @@ WWW::Baidu::Record - Record object representing an item in baidu.com's search re
 
 =head1 VERSION
 
-This document describes version 0.01 of C<WWW::Baidu::Record>, released Jan 19, 2007.
+This document describes version 0.02 of C<WWW::Baidu::Record>, released Jan 19, 2007.
 
 =head1 SYNOPSIS
 
