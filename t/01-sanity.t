@@ -12,7 +12,7 @@ my $cache = t::Cache->new(
     { 'namespace'  => '01-sanity' }
 );
 #warn "!!! $Cache::Cache::EXPIRES_NEVER";
-my $baidu = WWW::Baidu->new($cache);
+my $baidu = WWW::Baidu->new(cache => $cache);
 my $count = $baidu->search('ียาเดบ');
 is $count, 65, 'count okay';
 my @items;

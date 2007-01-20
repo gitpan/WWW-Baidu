@@ -2,21 +2,21 @@ NAME
     WWW::Baidu - Perl interface for the www.baidu.com search engine
 
 VERSION
-    This document describes version 0.04 of "WWW::Baidu", released Jan 19,
+    This document describes version 0.05 of "WWW::Baidu", released Jan 20,
     2007.
 
 SYNOPSIS
         use WWW::Baidu;
         my $baidu = WWW::Baidu->new;
-        my $count = $baidu->search('编程 技巧 Perl "Larry Wall"');
+        my $count = $baidu->search('Perl "Larry Wall"', 'Audrey');
         $baidu->limit(200);
         while (my $record = $baidu->next) {
-            print $record->title,
-                  $record->url,
-                  $record->summary,
-                  $record->date,
-                  $record->size,
-                  $record->cached_url;
+            print $record->title, "\n",
+                  $record->url, "\n",
+                  $record->summary, "\n",
+                  $record->date, "\n",
+                  $record->size, "\n",
+                  $record->cached_url, "\n\n\n";
         }
 
 DESCRIPTION
@@ -26,7 +26,7 @@ DESCRIPTION
 
 METHODS
     "$obj = WWW::Baidu->new()"
-    "$obj = WWW::Baidu->new( $cache )"
+    "$obj = WWW::Baidu->new( cache => $cache )"
         This is the constructor for "WWW::Baidu". It accepts an optional
         argument which will must be a Cache::Cache-compatible object.
         "WWW::Baidu" will use this cache instead of a default
@@ -89,9 +89,9 @@ CODE COVERAGE
         ---------------------------- ------ ------ ------ ------ ------ ------ ------
         File                           stmt   bran   cond    sub    pod   time  total
         ---------------------------- ------ ------ ------ ------ ------ ------ ------
-        blib/lib/WWW/Baidu.pm          98.9   85.0   66.7  100.0  100.0  100.0   95.0
+        blib/lib/WWW/Baidu.pm          98.0   83.3   66.7  100.0  100.0  100.0   93.7
         blib/lib/WWW/Baidu/Record.pm  100.0    n/a    n/a  100.0    n/a    0.0  100.0
-        Total                          99.0   85.0   66.7  100.0  100.0  100.0   95.4
+        Total                          98.2   83.3   66.7  100.0  100.0  100.0   94.1
         ---------------------------- ------ ------ ------ ------ ------ ------ ------
 
 SOURCE CONTROL

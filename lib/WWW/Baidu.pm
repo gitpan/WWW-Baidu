@@ -9,15 +9,25 @@ use HTML::TreeBuilder;
 #use YAML::Syck;
 use Encode qw/ encode decode /;
 use WWW::Baidu::Record;
+use Carp 'croak';
 use utf8;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 our $Debug = 1;
 
 sub new ($@) {
     my $class = ref $_[0] ? ref shift : shift;
-    my $cache = shift;
+    my $cache;
+    if (@_ == 1 and ref $_[0]) { # for backward-compatibility
+        $cache = shift;
+    } else {
+        my %opts = @_;
+        $cache = delete $opts{cache};
+        if (%opts) {
+            croak "WWW::Baid::new: Unknown options ", join(' ', keys %opts);
+        }
+    }
     bless {
         current => 0,
         limit   => undef,
@@ -120,7 +130,7 @@ sub _parse_record ($$) {
     if ($text =~
         s/\s+(\d+[KM])\s+(\d{4}-\d{1,2}-\d{1,2})\b//s) {
         ($size, $date) = ($1, $2);
-    };
+    }
     WWW::Baidu::Record->new(
         {
             title      => _($title),
@@ -147,21 +157,23 @@ WWW::Baidu - Perl interface for the www.baidu.com search engine
 
 =head1 VERSION
 
-This document describes version 0.04 of C<WWW::Baidu>, released Jan 19, 2007.
+This document describes version 0.05 of C<WWW::Baidu>, released Jan 20, 2007.
 
 =head1 SYNOPSIS
 
     use WWW::Baidu;
     my $baidu = WWW::Baidu->new;
-    my $count = $baidu->search('编程 技巧 Perl "Larry Wall"');
+    # ensure the keys are in the GBK/GB2312 encoding if they're Chinese
+    my $count = $baidu->search('Perl "Larry Wall"', 'Audrey');
     $baidu->limit(200);
     while (my $record = $baidu->next) {
-        print $record->title,
-              $record->url,
-              $record->summary,
-              $record->date,
-              $record->size,
-              $record->cached_url;
+        # the results are in GBK/GB2312 encoding
+        print $record->title, "\n",
+              $record->url, "\n",
+              $record->summary, "\n",
+              $record->date, "\n",
+              $record->size, "\n",
+              $record->cached_url, "\n\n\n";
     }
 
 =head1 DESCRIPTION
@@ -175,7 +187,7 @@ Google. This module provides you with a Perl interface to that site.
 
 =item C<< $obj = WWW::Baidu->new() >>
 
-=item C<< $obj = WWW::Baidu->new( $cache ) >>
+=item C<< $obj = WWW::Baidu->new( cache => $cache ) >>
 
 This is the constructor for C<WWW::Baidu>. It accepts an optional argument which will must
 be a L<Cache::Cache>-compatible object. C<WWW::Baidu> will use this cache instead of a default
@@ -246,9 +258,9 @@ L<Devel::Cover> report on this module test suite.
     ---------------------------- ------ ------ ------ ------ ------ ------ ------
     File                           stmt   bran   cond    sub    pod   time  total
     ---------------------------- ------ ------ ------ ------ ------ ------ ------
-    blib/lib/WWW/Baidu.pm          98.9   85.0   66.7  100.0  100.0  100.0   95.0
+    blib/lib/WWW/Baidu.pm          98.0   83.3   66.7  100.0  100.0  100.0   93.7
     blib/lib/WWW/Baidu/Record.pm  100.0    n/a    n/a  100.0    n/a    0.0  100.0
-    Total                          99.0   85.0   66.7  100.0  100.0  100.0   95.4
+    Total                          98.2   83.3   66.7  100.0  100.0  100.0   94.1
     ---------------------------- ------ ------ ------ ------ ------ ------ ------
 
 =head1 SOURCE CONTROL
