@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 use t::Cache;
-use Test::More tests => 8 * 7 + 6 + 3 * 6;
+use Test::More tests => 8 * 7 + 9 + 3 * 6;
 BEGIN { use_ok('WWW::Baidu'); }
 
 #binmode \*STDOUT, ':encoding(GBK)';
@@ -102,6 +102,7 @@ is( $items[$i]->size, '110K' );
 like( $items[$i]->cached_url,
     qr{^http://cache.baidu.com/c\?word=.*http%3A//www%2Eilib%2Ecn.*?\&user=baidu$} );
 
+# Test for a lot of hits
 $count = $baidu->search('ÊĞ Â· ºÅ');
 is ($count, '4710000');
 
@@ -134,3 +135,9 @@ is $item->cached_url, undef;
 
 ok $baidu->next;
 is $baidu->next, undef, 'limit is 4';
+
+# Test for 0 hit
+$count = $baidu->search('ÕÂÒàÇï');
+is $count, 0, 'no results found';
+is $baidu->next, undef, '"next" returns undef';
+is $baidu->{limit}, 4, 'limit not reset';

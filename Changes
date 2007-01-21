@@ -1,5 +1,11 @@
 = Change Log for WWW::Baidu
 
+== Version 0.06 (2007-01-21, rev 10)
+* fixed the retval of the search method when baidu finds no results
+* fixed the search method which should have cleared the internal search result buffer when called.
+* added tests for these fixed bugs.
+* updated the POD to clarify the behavior of a second call of the search method.
+
 == Version 0.05 (2007-01-20, rev 8)
 * removed Chinese chars from the POD (i was suffering from search.cpan.org's encoding)
 * made the sample code in SYNOPSIS more "usable"

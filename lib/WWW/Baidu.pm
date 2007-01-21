@@ -12,7 +12,7 @@ use WWW::Baidu::Record;
 use Carp 'croak';
 use utf8;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 our $Debug = 1;
 
@@ -45,6 +45,7 @@ sub search ($@) {
     my $self = shift;
     my $keys = join ' ', @_;
     $self->{current} = 0;
+    $self->{records} = [];
     my $agent = $self->{agent};
     $agent->env_proxy();
     $agent->get('http://www.baidu.com');
@@ -56,6 +57,7 @@ sub search ($@) {
     my $content = $agent->content;
     my $pat = _('百度一下，找到相关网页.*?(\d+(?:\,\d+)*)\s*篇');
     my ($count) = ($content =~ /$pat/);
+    if (!defined $count) { return 0; }
     $count =~ s/,//g;
     $self->_extract_items($content);
     return $count;
@@ -157,7 +159,7 @@ WWW::Baidu - Perl interface for the www.baidu.com search engine
 
 =head1 VERSION
 
-This document describes version 0.05 of C<WWW::Baidu>, released Jan 20, 2007.
+This document describes version 0.06 of C<WWW::Baidu>, released Jan 21, 2007.
 
 =head1 SYNOPSIS
 
@@ -200,6 +202,9 @@ Note that the return value C<$count> is only an estimation by Baidu. Usually it'
 total number of records that you can fetch by the C<next> method.
 
 It's highly recommended to pass only string keys in the GBK or GB2312 encoding.
+
+A call of this method will clear the internal search results' buffer and the iterator counter, but
+the C<limit> setting is left intact.
 
 =item C<< $obj->limit($count) >>
 
@@ -258,9 +263,9 @@ L<Devel::Cover> report on this module test suite.
     ---------------------------- ------ ------ ------ ------ ------ ------ ------
     File                           stmt   bran   cond    sub    pod   time  total
     ---------------------------- ------ ------ ------ ------ ------ ------ ------
-    blib/lib/WWW/Baidu.pm          98.0   83.3   66.7  100.0  100.0  100.0   93.7
+    blib/lib/WWW/Baidu.pm          98.1   84.6   66.7  100.0  100.0  100.0   93.9
     blib/lib/WWW/Baidu/Record.pm  100.0    n/a    n/a  100.0    n/a    0.0  100.0
-    Total                          98.2   83.3   66.7  100.0  100.0  100.0   94.1
+    Total                          98.2   84.6   66.7  100.0  100.0  100.0   94.3
     ---------------------------- ------ ------ ------ ------ ------ ------ ------
 
 =head1 SOURCE CONTROL

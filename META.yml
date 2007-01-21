@@ -18,4 +18,4 @@ requires:
   WWW::Mechanize: 1.20
   WWW::Mechanize::Cached: 1.32
   perl: 5.8.1
-version: 0.05
+version: 0.06

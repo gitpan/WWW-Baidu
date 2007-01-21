@@ -2,15 +2,17 @@ NAME
     WWW::Baidu - Perl interface for the www.baidu.com search engine
 
 VERSION
-    This document describes version 0.05 of "WWW::Baidu", released Jan 20,
+    This document describes version 0.06 of "WWW::Baidu", released Jan 21,
     2007.
 
 SYNOPSIS
         use WWW::Baidu;
         my $baidu = WWW::Baidu->new;
+        # ensure the keys are in the GBK/GB2312 encoding if they're Chinese
         my $count = $baidu->search('Perl "Larry Wall"', 'Audrey');
         $baidu->limit(200);
         while (my $record = $baidu->next) {
+            # the results are in GBK/GB2312 encoding
             print $record->title, "\n",
                   $record->url, "\n",
                   $record->summary, "\n",
@@ -40,6 +42,9 @@ METHODS
 
         It's highly recommended to pass only string keys in the GBK or
         GB2312 encoding.
+
+        A call of this method will clear the internal search results' buffer
+        and the iterator counter, but the "limit" setting is left intact.
 
     "$obj->limit($count)"
         Limits the total number of records WWW::Baidu will try to offer.
@@ -89,9 +94,9 @@ CODE COVERAGE
         ---------------------------- ------ ------ ------ ------ ------ ------ ------
         File                           stmt   bran   cond    sub    pod   time  total
         ---------------------------- ------ ------ ------ ------ ------ ------ ------
-        blib/lib/WWW/Baidu.pm          98.0   83.3   66.7  100.0  100.0  100.0   93.7
+        blib/lib/WWW/Baidu.pm          98.1   84.6   66.7  100.0  100.0  100.0   93.9
         blib/lib/WWW/Baidu/Record.pm  100.0    n/a    n/a  100.0    n/a    0.0  100.0
-        Total                          98.2   83.3   66.7  100.0  100.0  100.0   94.1
+        Total                          98.2   84.6   66.7  100.0  100.0  100.0   94.3
         ---------------------------- ------ ------ ------ ------ ------ ------ ------
 
 SOURCE CONTROL
